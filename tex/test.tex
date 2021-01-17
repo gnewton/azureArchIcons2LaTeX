@@ -1,0 +1,26 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%
+%% https://github.com/joaomlourenco/assocarray/assocarray.sty
+\usepackage{assocarray}
+%%%%%
+
+\newlength{\azL}
+\setlength{\azL}{1cm}
+
+\newcommand{\AzureStackEdge}[1]{hello \hspace{#1}mmm}
+\newcommand{\AzureStackEdgeL}{A\AzureStackEdge{\azlL}B}
+
+
+\assocarray{azl}
+
+\azl[00691]:={\noexpand\AzureStackEdgeL}
+
+\begin{document}
+m
+\azl[00691]
+\\
+\setlength{\azlL}{3cm}
+\azl[00691]
+
+\end{document}

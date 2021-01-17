@@ -13,3 +13,16 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# emacs
+*~
+
+# tex
+*.aux
+*.idx
+*.log
+*.ilg
+*.ind
+*.toc
+\#*#
+__MACOSX

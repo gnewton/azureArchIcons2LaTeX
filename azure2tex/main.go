@@ -7,11 +7,12 @@ import (
 	"io"
 	"log"
 	"os"
+	"sort"
 	"strings"
 )
 
 var argAssetZipFile string = "Azure_Public_Service_Icons_V3.zip"
-var argConvertSvgWithInkscape = true
+var argConvertSvgWithInkscape = false
 var argIconsFile string = "tex/icons.tex"
 var argStyleFile string = "sty/azureicons.sty"
 var argInkscapeBinPath string = "/usr/bin/inkscape"
@@ -51,6 +52,9 @@ func main() {
 		log.Fatal(err)
 	}
 	printEntries(wicons, entries)
+
+	processTemplate(entries)
+
 }
 
 func processAzureIcons(src string) (map[string][]*Entry, error) {
@@ -96,7 +100,7 @@ func processAzureIcons(src string) (map[string][]*Entry, error) {
 		}
 		entries[entry.category] = categoryList
 
-		if true {
+		if argConvertSvgWithInkscape {
 			var rc io.ReadCloser
 
 			// Open file (in zip stream)
@@ -132,7 +136,14 @@ func fixName(s string) string {
 }
 
 func printEntries(w io.Writer, entries map[string][]*Entry) {
-	for k, v := range entries {
+	keys := make([]string, 0, len(entries))
+	for k, _ := range entries {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		v := entries[k]
+		sort.Sort(ByName(v))
 		fmt.Fprintln(w, "\\subsection{"+k+"}")
 		for _, e := range v {
 			//fmt.Fprintln(w, strings.ReplaceAll(e.pdfFileName, "_", "\\_"))

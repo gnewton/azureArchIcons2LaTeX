@@ -20,13 +20,20 @@
 \usepackage{tabularx}
 \usepackage[export]{adjustbox}
 \usepackage{multicol}
-
+%%%%%%%%%%%%%
+%% https://github.com/joaomlourenco/assocarray/assocarray.sty
+\usepackage{assocarray}
+%%%%%
 \usepackage[inner=10mm,outer=10mm]{geometry}
 
 
-%\usepackage{../sty/azureicons} 
+\usepackage{../sty/azureicons} 
 
 \graphicspath{{../icons_tex/}}
+
+\newlength{\azL}
+\setlength{\azL}{1cm}
+\assocarray{azl}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\LaTeX\ Style for Azure Icons}
@@ -121,25 +128,20 @@
 
 %%%%%%
 \section{What is this?}
-\LaTeX\ style (\texttt{awsicons.sty}) which allows you to use the \href{https://aws.amazon.com/architecture/icons/}{AWS architectural icons} in your \LaTeX\  documents.
+\LaTeX\ style (\texttt{azureicons.sty}) which allows you to use the \href{https://docs.microsoft.com/en-us/azure/architecture/icons/}{Azure architectural icons} in your \LaTeX\  documents.
 
 \vspace{3mm}
 
-%\noindent The AWS SVG icons are converted to {\LaTeX}--compatible PDF form using \href{https://inkscape.org/}{Inkscape} \texttt{\inkscapeVersion} using the purpose--written Go program \href{https://github.com/gnewton/awsArchIcons2LaTeX/aws2tex}{aws2tex}. 
+\noindent The Azure SVG icons are converted to {\LaTeX}--compatible PDF form using \href{https://inkscape.org/}{Inkscape} \texttt{\inkscapeVersion} using the purpose--written Go program \href{https://github.com/gnewton/azureArchIcons2LaTeX/azure2tex}{azure2tex}. 
 
-\noindent This Go program, \texttt{aws2tex}, creates:
+\noindent This Go program, \texttt{azure2tex}, creates:
 \begin{itemize}
-\item \texttt{awsicons.sty} file
+\item \texttt{azureicons.sty} file
 \item \LaTeX--compatible PDF versions of icons (and written to the \texttt{icons\_tex} directory, using Inkscape).
 \item This document, which is to illustrate as well as index these icons and their corresponding \LaTeX\ \  macros.
-  \newline
-  \textbf{NB:} Not all icons are converted:
-  \begin{itemize}
-  \item For \textit{Resources}, only the \texttt{\_Light} versions. The \texttt{\_Dark} are omitted.
-  \item For \textit{Services}, only the \texttt{\_64} versions. The lower resolution \texttt{\_16,\_32,\_48} are omitted.
-  \end{itemize}
-For instructions on how to generate this document with \textit{all} icons, please see the instructions in the \href{https://github.com/gnewton/awsArchIcons2LaTeX}{README.md} at the github repo.\\
-This document is: \url{https://github.com/gnewton/awsArchIcons2LaTeX/awsAllIcons.pdf}
+
+  For instructions on how to generate this document with \textit{all} icons, please see the instructions in the \href{https://github.com/gnewton/azureArchIcons2LaTeX$}{README.md} at the github repo.\\
+This document is: \url{https://github.com/gnewton/azureArchIcons2LaTeX/azureAllIcons.pdf}
 \end{itemize}
 This document also includes hyperlinks to Google searches of the titles of each icon.
 
@@ -148,10 +150,10 @@ This document also includes hyperlinks to Google searches of the titles of each 
 \section{How to use it?}
 There are two parts:
 \begin{enumerate}
-\item \texttt{awsicons.sty} file
+\item \texttt{azureicons.sty} file
 \item directory with all of the icons rendered into \LaTeX\ compatible form (in the repo, this is: \texttt{icons\_tex}).
 \end{enumerate}
-All you need to do is use the package to your \LaTeX\ document using \texttt{{\textbackslash}usepackage} (after having added the \texttt{awsicons.sty} file to where \LaTeX\ can see it, or put it in the same directory as your document) AND add the directory containing all the generated icons to the \texttt{{\textbackslash}graphicspath\{...\}}.\\
+All you need to do is use the package to your \LaTeX\ document using \texttt{{\textbackslash}usepackage} (after having added the \texttt{azureicons.sty} file to where \LaTeX\ can see it, or put it in the same directory as your document) AND add the directory containing all the generated icons to the \texttt{{\textbackslash}graphicspath\{...\}}.\\
 
 \noindent For example:
 \vspace{4mm}
@@ -159,52 +161,68 @@ All you need to do is use the package to your \LaTeX\ document using \texttt{{\t
 \begin{blockquote}
 \begin{verbatim}
 % preamble
-\usepackage{awsicons} 
+\usepackage{azureicons} 
 \graphicspath{../icons_tex/}
 % after \begin{document}
-Here is a 1cm API Gateway:
-\RAPIGatewayEndpoint{1cm}
+Here is a 1cm Data Box:
+\DataBox{1cm}
+\vspace{1cm}
+
 Here is a 3cm Lambda function:
-\RLambdaLambdaFunc{3cm}
+\AzrMigrate{3cm}
 
 \end{verbatim}
 \end{blockquote}
 
 \noindent Resulting in:\\
 \begin{blockquote}
-Here is a 1cm API Gateway:
-%\RAPIGatewayEndpoint{1cm}
-Here is a 3cm Lambda function:
-%\RLambdaLambdaFunc{3cm}
+  Here is a 1cm Data Box:
+\DataBox{1cm}
 
+\vspace{1cm}
+Here is a 3cm Azure Migrate:
+\AzrMigrate{3cm}
 \end{blockquote}
 
 [Without the gray background]
     
 %%%%%%
 \subsection{Examples}
-There are more complex examples in the \href{https://github.com/gnewton/awsArchIcons2LaTeX/tree/main/examples}{examples} directory, including one which recreates an AWS Architecture blog diagram.
+There are more complex examples in the \href{https://github.com/gnewton/azureArchIcons2LaTeX/tree/main/examples}{examples} directory.
 
-\begin{itemize}
-\item \href{https://github.com/gnewton/awsArchIcons2LaTeX/blob/main/examples/simple.pdf}{Simple example}
-\item AWS Architecture blog diagram: \textit{\href{https://github.com/gnewton/awsArchIcons2LaTeX/blob/main/examples/Data-pipeline-Grov-Technologies.pdf}{Building a Controlled Environment Agriculture Platform}\footnote{\url{https://aws.amazon.com/blogs/architecture/building-a-controlled-environment-agriculture-platform/}}}, by Ashu Joshi, 2020.12.22.
-\end{itemize}
   
 \section{Sources}
-The AWS Architecture icons used here are from \url{https://aws.amazon.com/architecture/icons/}.\\
-%
-%The specific assets package used: \href{https://d1.awsstatic.com/webteam/architecture-icons/Q32020/\assetZipFile}{\assetZipFileSplit}
-%The specific assets package used: {\sloppy \href{https://d1.awsstatic.com/webteam/architecture-icons/Q32020/}{\assetZipFile}}
+The Azure Architecture icons used here are from: \url{https://docs.microsoft.com/en-us/azure/architecture/icons/}.\\
+The specific assets package used: \href{https://arch-center.azureedge.net/icons/\assetZipFile}{\assetZipFileSplit}
 
-\vspace{3cm}
-\noindent \copyright\ Glen Newton 2020\\
-Icons in this document (I believe) are: \ \copyright\ Amazon Web Services (AWS)
-\vspace{5mm}
+
+
+\section{Copyright and Terms of Use}
+
+\begin{itemize}
+\item This document: \copyright\ Glen Newton 2021
+\item Icons \copyright \ 2021 Microsoft.\\
+  Icon Terms of Use: from Microsoft \href{https://docs.microsoft.com/en-us/azure/architecture/icons/}{Azure Icons - Azure Architecture Center}:\\
+  {\em
+\begin{blockquote}
+    Microsoft permits the use of these icons in architectural diagrams,
+    training materials, or documentation. You may copy, distribute, and
+    display the icons only for the permitted use unless granted explicit
+    permission by Microsoft. Microsoft reserves all other rights.
+\end{blockquote}
+}
+\end{itemize}
+
+
+\newpage
+\section{Icons}
 
 \setlength{\parindent}{0pt}
 
 \begin{multicols}{2}\footnotesize
-%%%%%%%%%%%%% ICON CONTENT: generated by azure2tex:
+  %%%%%%%%%%%%% ICON CONTENT: generated by azure2tex:
+
+  
 \input{icons.tex}
 \end{multicols}\clearpage
 
@@ -213,13 +231,93 @@ Icons in this document (I believe) are: \ \copyright\ Amazon Web Services (AWS)
 
 \appendix
 \section{Mapping of icon names to macros names}
-In order to have reasonably short macro names, the following mappings have been made by \texttt{aws2tex}, being careful not to introduce any naming collisions.
+In order to have reasonably short macro names, the following mappings have been made by \texttt{azure2tex}, being careful not to introduce any naming collisions.
 In addition, \LaTeX\ macros cannot contain numbers, so all numbers have been mapped to words, i.e. 1 $\rightarrow$ One, 5 $\rightarrow$ Five, etc.
 The below mappings are applied in order, followed by the number mappings.
 {\tiny
-\begin{multicols}{3}
-  \begin{enumerate}
-  \item example
+  \begin{multicols}{3}
+    \begin{enumerate}
+    \item Alternate $\rightarrow$  Altern
+    \item Application $\rightarrow$  App
+    \item Archive $\rightarrow$  Archv
+    \item Attribute $\rightarrow$  Att
+    \item Attributes $\rightarrow$  Atts
+    \item Aurora $\rightarrow$  Aur
+    \item Authority $\rightarrow$  Auth
+    \item Azure $\rightarrow$  Azr
+    \item Account $\rightarrow$  Accnt
+    \item Bucket $\rightarrow$  Bkt
+    \item Certificate $\rightarrow$  Cert
+    \item Compute $\rightarrow$  Cmput
+    \item Credential $\rightarrow$  Cred
+    \item Database $\rightarrow$  DB
+    \item Database $\rightarrow$  DB
+    \item Default $\rightarrow$  Dflt
+    \item Development $\rightarrow$  Dev
+    \item Device $\rightarrow$  Dev
+    \item Directory $\rightarrow$  Dir
+    \item Distribution $\rightarrow$  Distr
+    \item Elemental $\rightarrow$  Elem
+    \item Emergency $\rightarrow$  Emerg
+    \item Encrypted $\rightarrow$  Encrd
+    \item Encryption $\rightarrow$  Encr
+    \item Enterprise $\rightarrow$  Entrprs
+    \item Function $\rightarrow$  Func
+    \item General $\rightarrow$  Gen
+    \item Global $\rightarrow$  Glbl
+    \item Governance $\rightarrow$  Govern
+    \item Groups $\rightarrow$  Grp
+    \item Internet $\rightarrow$  INet
+    \item Identity $\rightarrow$  Ident
+    \item Image $\rightarrow$  Img
+    \item Image $\rightarrow$  Img
+    \item Instance $\rightarrow$  Inst
+    \item Integration $\rightarrow$  Integ
+    \item Intelligent $\rightarrow$  Intell
+    \item Kinesis $\rightarrow$  Kin
+    \item Kubernetes $\rightarrow$  Kuber
+    \item License $\rightarrow$  Licns
+    \item LoadBalancer $\rightarrow$  LB
+    \item Managed $\rightarrow$  Mngd
+    \item Management $\rightarrow$  Mngmt
+    \item Manager $\rightarrow$  Mngr
+    \item Medical $\rightarrow$  Med
+    \item Microsoft $\rightarrow$  MS
+    \item Migration $\rightarrow$  Migrat
+    \item Mobile $\rightarrow$  Mob
+    \item Multiple $\rightarrow$  Mult
+    \item Namespaces $\rightarrow$  NS
+    \item Notification $\rightarrow$  Notif
+    \item Object $\rightarrow$  Obj
+    \item Organizational $\rightarrow$  Org
+    \item Page $\rightarrow$  Pg
+    \item Points $\rightarrow$  Pts
+    \item Providers $\rightarrow$  Prvdr
+    \item Profile $\rightarrow$  Prof
+    \item Recovery $\rightarrow$  Recov
+    \item Recovery $\rightarrow$  Recov
+    \item Registry $\rightarrow$  Reg
+    \item Rendering $\rightarrow$  Rend
+    \item Replication $\rightarrow$  Repli
+    \item Resource $\rightarrow$  Res
+    \item Search $\rightarrow$  Srch
+    \item Source $\rightarrow$  Src
+    \item Security $\rightarrow$  Sec
+    \item Service $\rightarrow$  Svc
+    \item Simulation $\rightarrow$  Simul
+    \item Storage $\rightarrow$  Stor
+    \item Stream $\rightarrow$  Strm
+    \item SystemManager $\rightarrow$  SysMgr
+    \item Thing $\rightarrow$  Thng
+    \item ThinkBox $\rightarrow$  TB
+    \item TimeSeries $\rightarrow$  TS
+    \item TrainingCertification $\rightarrow$  TrainCert
+    \item Universal $\rightarrow$  Univer
+    \item Vault $\rightarrow$  Vlt
+    \item Virtual $\rightarrow$  Virt
+    \item Volume $\rightarrow$  Vol
+    \item Windows $\rightarrow$  Win
+    \item Warning $\rightarrow$  Warn
   \end{enumerate}
 \end{multicols}
 }

@@ -12,7 +12,7 @@ import (
 )
 
 var argAssetZipFile string = "Azure_Public_Service_Icons_V3.zip"
-var argConvertSvgWithInkscape = false
+var argConvertSvgWithInkscape = true
 var argIconsFile string = "tex/icons.tex"
 var argStyleFile string = "sty/azureicons.sty"
 var argInkscapeBinPath string = "/usr/bin/inkscape"
@@ -146,13 +146,9 @@ func printEntries(w io.Writer, entries map[string][]*Entry) {
 		sort.Sort(ByName(v))
 		fmt.Fprintln(w, "\\subsection{"+k+"}")
 		for _, e := range v {
-			//fmt.Fprintln(w, strings.ReplaceAll(e.pdfFileName, "_", "\\_"))
-			pdfFileNameTeX := strings.ReplaceAll(e.pdfFileName, "_", "\\_")
-			include := "\\includegraphics[width=1cm,valign=t]{" + e.pdfFileName + "}"
-			fmt.Fprintf(w, "\\gxs{%s}{%s}{%s}{%s}{%s}\n\n", e.englishName, include, pdfFileNameTeX, e.macroName, e.category)
-			//fmt.Fprintln(w, e.englishName)
-			//fmt.Fprintln(w, e.macroName)
-			//fmt.Fprintln(w, "\\includegraphics[width=1cm,valign=t]{"+e.pdfFileName+"}\\ \\  ")
+			pdfFileNameTex := strings.ReplaceAll(e.pdfFileName, "_", "\\_")
+			include := "\\" + e.macroName + "{1cm}"
+			fmt.Fprintf(w, "\\gxs{%s}{%s}{%s}{%s}{%s}\n\n", e.englishName, include, pdfFileNameTex, e.macroName, e.category)
 		}
 
 	}
@@ -171,7 +167,6 @@ var numMap = map[string]string{"0": "Zero", "1": "One", "2": "Two", "3": "Three"
 
 // To shorten macro names
 var macroSubs = []string{
-
 	"Alternate", "Altern",
 	"Application", "App",
 	"Archive", "Archv",
